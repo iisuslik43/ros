@@ -24,6 +24,10 @@ class Chaser:
             move.angular.z -= 2 * np.pi
         rospy.loginfo(f'{move.angular.z}  {self.chaser_pose.theta}')
         move.angular.z -= self.chaser_pose.theta
+        if move.angular.z > np.pi:
+            move.angular.z -= 2 * np.pi
+        if move.angular.z < -np.pi:
+            move.angular.z += 2 * np.pi
         self.pub.publish(move)
 
 
